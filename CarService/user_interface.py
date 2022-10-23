@@ -57,6 +57,7 @@ def ui_person():
         surname = input("Фамилия: ")
         if surname.isalpha(): 
             # data_person['surname'] = surname
+            surname = surname.capitalize()
             data_person.append(surname)
             break
         else:
@@ -66,6 +67,7 @@ def ui_person():
         name = input("Имя: ")
         if name.isalpha(): 
             # data_person['name'] = name
+            name = name.capitalize()
             data_person.append(name)
             break
         else:
@@ -146,6 +148,7 @@ def ui_person():
         state_number = input("Гос номер: ")
         if state_number.isalnum(): 
             # data_car['state_number'] = state_number
+            state_number = state_number.lower()
             data_car.append(state_number)
             break
         else:
@@ -157,6 +160,24 @@ def ui_person():
     return data
 
 # def ui_car():        
-# def ui_searh():        
+def ui_searh_surname():  
+    surname = input("Введите фамилию для поиска: ")
+    while True:
+        if surname.isalpha():
+            surname = surname.capitalize()
+            return surname
+        else: 
+            print("Некоректный ввод!")
+
+def ui_searh_state_number():  
+    state_number = input("Введите гос. номер авто: ")
+    while True:
+        if state_number.isalnum():
+            state_number = state_number.lower()
+            return state_number
+        else: 
+            print("Некоректный ввод!")
+        
+
 # def ui_repair():        
 # def ui_change():        

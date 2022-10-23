@@ -72,3 +72,7 @@ def create(path, item):
 
 # create_db('db_carservice.sqlite', person)
 # create_db('db_carservice.sqlite', repair)
+
+# c_db.create_db(path, 'persons')
+#     c_db.create_db(path, 'cars')
+#     c_db.create_db(path, 'repair')
