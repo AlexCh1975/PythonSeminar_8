@@ -30,15 +30,15 @@ def select():
 
     # Внести изменения в базу            
     elif index == 4:
-        data = ui.ui_change()
-        if index == 1:
-            data = ui.ui_change() # Изменение данных
-        elif index == 2:
-            data = ui.ui_add_car() # добавить авто
-        elif index == 3:
-            data = ui.ui_change_repair() # ремонт
-        elif index == 4:
-            data = ui.ui_change_delete() # Удоление данных
+        index = ui.ui_change()
+        # if index == 1:
+        #     data = ui.ui_change() # Изменение данных
+        # elif index == 2:
+        #     data = ui.ui_add_car() # добавить авто
+        if index == 3:
+            change_repair(path) # ремонт
+        # elif index == 4:
+        #     data = ui.ui_change_delete() # Удоление данных
 
     # else:
     #     c_db.create_db(path, 'persons')
@@ -72,16 +72,23 @@ def search_state_number(path, state_number):
         if data:
             mp.print_res(data[0])
             mp.print_res(data[1])
+            mp.print_res(data[2])
         else:
             print("Такого номера в базе нет!")
 
-# def search_state_number(path, state_number):
-#         data = ms.search_state_number(path, state_number)
-#         if data:
-#             mp.print_res(data[0])
-#             mp.print_res(data[1])
-#         else:
-#             print("Такого номера в базе нет!")
+def change_repair(path):
+    print("Старт")
+    state_number = ui.ui_searh_state_number()
+    data = ms.search_state_number(path, state_number)
+    # print(data)
+    id = data[1][0][0]
+    if data:
+        data_ui = ui.ui_change_repair()
+        data_ui.append(id)
+        # print(data_ui)
+        write.add_table_repair(path, data_ui)
+    else:
+        print("Такого номера в базе нет!")
 
         
 

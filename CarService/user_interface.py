@@ -1,3 +1,4 @@
+
 import re
 from datetime import datetime
 
@@ -18,7 +19,7 @@ def menu_carservice():
         else:
             print(f"{index} Некоректный выбор!")
 
-def change():
+def ui_change():
     print("Внести изменения в базу:")
     print("     Изменение данных: 1")
     print("     Добавить транспортное средство: 2")
@@ -159,24 +160,55 @@ def ui_person():
     data['cars'] = data_car
     return data
 
-# def ui_car():        
-def ui_searh_surname():  
-    surname = input("Введите фамилию для поиска: ")
+#         
+def ui_searh_surname():
+    print('-------------------------------------------------') 
+    surname = input("Введите фамилию для поиска: ") 
     while True:
+        # surname = input("Введите фамилию для поиска: ")
         if surname.isalpha():
             surname = surname.capitalize()
             return surname
         else: 
             print("Некоректный ввод!")
 
-def ui_searh_state_number():  
-    state_number = input("Введите гос. номер авто: ")
+def ui_searh_state_number():
+    print('-------------------------------------------------')
+    state_number = input("Введите гос. номер авто: ")  
     while True:
+        # state_number = input("Введите гос. номер авто: ")
         if state_number.isalnum():
             state_number = state_number.lower()
             return state_number
         else: 
             print("Некоректный ввод!")
+
+
+def ui_change_repair():
+    print('-------------------------------------------------')
+    data = []
+    while True:
+        date = input("Введите дату ремонта: ")
+        if date.isdigit() or '.' in date:
+            data.append(date)
+            break
+        else:
+            print("Некоректный ввод!")
+
+    repair_op = input("Ремонт: ")
+    data.append(repair_op)
+
+    while True:
+        price = input("Стоимость ремонта: ")
+        if price.isdigit() or '.' in price:
+            price = float(price)
+            data.append(price)
+            break
+        else:
+            print("Некоректный ввод!")
+
+    return data
+   
         
 
 # def ui_repair():        
