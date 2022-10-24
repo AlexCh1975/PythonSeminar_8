@@ -22,10 +22,10 @@ def menu_carservice():
 
 def ui_change():
     print("Внести изменения в базу:")
-    print("     Изменение данных: 1")
+    print("     Изменение № телефона клиента: 1")
     print("     Добавить транспортное средство: 2")
-    print("     Ремонт: 3")
-    print("     Удалить: 4")
+    print("     Ремотные работы: 3")
+    print("     Удалить клиента из базы: 4")
 
     while True:
         index = int(input("Тип операции: "))
@@ -296,7 +296,16 @@ def ui_select_person(data):
             id = int(id)
             return id
         else:
-            print("Некоректный ввод!")    
+            print("Некоректный ввод!")
+
+def ui_new_phone():
+    print('-------------------------------------------------')
+    while True:
+        n_phone = input("Введите новый телефон: ")
+        if n_phone.isdigit():
+            return n_phone
+        else:
+            print("Некоректный ввод!")
 
 
 

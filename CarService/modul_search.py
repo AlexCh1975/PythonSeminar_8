@@ -62,4 +62,4 @@ def search_state_number(path, state_number):
 
     return res
 
-# print(search_state_number('db_carservice.db', 'ке234н'))
+# print(search_surname_p('db_carservice.db', 'Соколова'))

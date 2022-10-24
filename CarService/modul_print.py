@@ -14,7 +14,7 @@ def print_res(data):
         for i in range(len(data)):
             index = 0
             for j in range(len(data[i])):
-                print(f'{car_tuple[index]}: {data[i][j]}')
+                print(f'{person_tuple[index]}: {data[i][j]}')
                 index +=1
             print('-------------------------------------------------')
     elif len(data[0]) == 8:

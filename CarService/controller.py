@@ -5,6 +5,7 @@ import create_db as c_db
 import modul_search as ms
 import modul_print as mp
 import modul_update as mu
+import modul_delete as md
 import os
 
 
@@ -41,8 +42,8 @@ def select():
             add_car(path) # добавить авто
         elif index == 3:
             change_repair(path) # ремонт
-        # elif index == 4:
-        #     data = ui.ui_change_delete() # Удоление данных
+        elif index == 4:
+            change_delete(path) # Удоление данных
 
     # else:
     #     c_db.create_db(path, 'persons')
@@ -82,6 +83,7 @@ def search_state_number(path, state_number):
         else:
             print("Такого номера в базе нет!")
 
+# Добавить ремонт по гос. номеру
 def change_repair(path):
     print("Старт")
     state_number = ui.ui_searh_state_number()
@@ -96,6 +98,7 @@ def change_repair(path):
     else:
         print("Такого номера в базе нет!")
 
+# Добавить авто
 def add_car(path):
     surname = ui.ui_searh_surname()
     data = ms.search_surname_p(path, surname)
@@ -107,16 +110,33 @@ def add_car(path):
         write.add_table_car(path, data_car)
         print(data_car)
 
+# Замена телефона клиента
 def change_phone(path):
     surname = ui.ui_searh_surname()
     data = ms.search_surname_p(path, surname)
+    # print(data)
     if len(data) > 1:
         id = ui.ui_select_person(data)
-    print(id)
-    exit()
-    mu.update(data)
-        
+        n_phone = ui.ui_new_phone()
+        mu.update(path, id, n_phone)
+    else:
+        id = data[0][0]
+        n_phone = ui.ui_new_phone()
+        mu.update(path, id, n_phone)
+    # print(id)
+    # exit()
+    # mu.update(data)
 
+# Удоление из базы
+def change_delete(path):
+    surname = ui.ui_searh_surname() 
+    data = ms.search_surname_p(path, surname)  
+    if len(data) > 1:
+        id = ui.ui_select_person(data)
+        md.delete(path, id)
+    else:
+        id = data[0][0]
+        md.delete(path, id)
     
     
 
