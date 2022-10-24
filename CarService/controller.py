@@ -20,7 +20,10 @@ def select():
     elif index == 2:
         surname = ui.ui_searh_surname()
         # data = ui.ui_searh_surname()
-        search_by_surname(path, surname)
+        data = search_by_surname(path, surname)
+        mp.print_res(data[0])
+        mp.print_res(data[1])
+        mp.print_res(data[2])
 
     # Поиск по гос. номеру    
     elif index == 3:
@@ -33,9 +36,9 @@ def select():
         index = ui.ui_change()
         # if index == 1:
         #     data = ui.ui_change() # Изменение данных
-        # elif index == 2:
-        #     data = ui.ui_add_car() # добавить авто
-        if index == 3:
+        if index == 2:
+            add_car(path) # добавить авто
+        elif index == 3:
             change_repair(path) # ремонт
         # elif index == 4:
         #     data = ui.ui_change_delete() # Удоление данных
@@ -63,7 +66,8 @@ def search_by_surname(path, surname):
         data = ms.search_surname(path, surname)
         # print(data)
         if data:
-            print(data)
+            # print(data)
+            return data
         else:
             print("Клиента с такой фамилией в базе нет!")
 
@@ -89,6 +93,17 @@ def change_repair(path):
         write.add_table_repair(path, data_ui)
     else:
         print("Такого номера в базе нет!")
+
+def add_car(path):
+    surname = ui.ui_searh_surname()
+    data = search_by_surname(path, surname)
+    print(data)
+    if len(data) == 1:
+        id = data[0][0]
+        data_car = ui.ui_add_car()
+        data_car.append(id)
+        write.add_table_car(path, data_car)
+        print(data_car)
 
         
 

@@ -5,9 +5,24 @@ def search_surname(path, surname):
     with sq.connect(path) as con:
         cur = con.cursor()
 
-        res = list(cur.execute("""
+        res_p = list(cur.execute("""
                     SELECT * FROM persons WHERE surname == ?
                     """, (surname,)))
+        id = res_p[0][0]
+
+        res_c = list(cur.execute("""
+                    SELECT * FROM cars WHERE person_id == ?
+                    """, (id,)))
+        id_c = res_c[0][0]
+
+        res_r = list(cur.execute("""
+                    SELECT * FROM repair WHERE car_id == ?
+                    """, (id_c,)))
+
+        res = []
+        res.append(res_p)
+        res.append(res_c)
+        res.append(res_r)
     return res
 
 

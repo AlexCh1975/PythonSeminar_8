@@ -32,7 +32,9 @@ def ui_change():
             return index
         else:
             print(f"{index} Некоректный выбор!")
-    exit()
+    # exit()
+
+
 
     
 
@@ -208,6 +210,71 @@ def ui_change_repair():
             print("Некоректный ввод!")
 
     return data
+
+# Добавить транспортное средство
+def ui_add_car():
+    print('-------------------------------------------------')
+    print("Внесите данные автомобиля!")
+    data_car = []
+
+    while True:
+        brand = input("Марка: ")
+        if brand.isalpha(): 
+            # data_car['brand'] = brand
+            data_car.append(brand)
+            break
+        else:
+            print("Некорректный ввод!")
+
+    while True:
+        model = input("Модель: ")
+        if model.isalnum():
+            # data_car['model'] = model
+            data_car.append(model)
+            break
+        else:
+            print("Некорректный ввод!")
+
+    while True:
+        year_issue = input("Год выпуска: ")
+        if year_issue.isdigit():
+            year_issue = int(year_issue)
+            # data_car['year_issue'] = year_issue
+            data_car.append(year_issue)
+            break
+        else:
+            print("Некорректный ввод!")
+
+    while True:
+        mileage = input("Пробег (км)(миль): ")
+        if mileage.isdigit(): 
+            mileage = int(mileage)
+            # data_car['mileage'] = mileage
+            data_car.append(mileage)
+            break
+        else:
+            print("Некорректный ввод!")
+
+    while True:
+        vin = input("VIN-номер (мин 10 мак 17): ")
+        if 9 < len(vin) < 18: 
+            # data_car['vin'] = vin
+            data_car.append(vin)
+            break
+        else:
+            print("Некорректный ввод!")
+
+    while True:
+        state_number = input("Гос номер: ")
+        if state_number.isalnum(): 
+            # data_car['state_number'] = state_number
+            state_number = state_number.lower()
+            data_car.append(state_number)
+            break
+        else:
+            print("Некорректный ввод!")
+    return data_car
+
    
         
 
