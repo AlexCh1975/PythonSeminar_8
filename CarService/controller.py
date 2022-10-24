@@ -4,6 +4,7 @@ import modul_write as write
 import create_db as c_db
 import modul_search as ms
 import modul_print as mp
+import modul_update as mu
 import os
 
 
@@ -34,8 +35,8 @@ def select():
     # Внести изменения в базу            
     elif index == 4:
         index = ui.ui_change()
-        # if index == 1:
-        #     data = ui.ui_change() # Изменение данных
+        if index == 1:
+            data = change_phone(path) # Изменение данных (номера телефона)
         if index == 2:
             add_car(path) # добавить авто
         elif index == 3:
@@ -49,10 +50,11 @@ def select():
     #     c_db.create_db(path, 'repair')
             # print(data)
 
+# Добавление клиента
 def add_in_db(path):
     data = ui.ui_person()
     write.add_table_person(path, data['persons'])
-    data_p = ms.search_surname(path, data['persons'][0])
+    data_p = ms.search_surname_p(path, data['persons'][0])
     if len(data_p) > 1:
         index = data_p[-1][0]
         print(index)
@@ -96,7 +98,7 @@ def change_repair(path):
 
 def add_car(path):
     surname = ui.ui_searh_surname()
-    data = search_by_surname(path, surname)
+    data = ms.search_surname_p(path, surname)
     print(data)
     if len(data) == 1:
         id = data[0][0]
@@ -105,6 +107,14 @@ def add_car(path):
         write.add_table_car(path, data_car)
         print(data_car)
 
+def change_phone(path):
+    surname = ui.ui_searh_surname()
+    data = ms.search_surname_p(path, surname)
+    if len(data) > 1:
+        id = ui.ui_select_person(data)
+    print(id)
+    exit()
+    mu.update(data)
         
 
     

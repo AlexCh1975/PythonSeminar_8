@@ -1,4 +1,4 @@
-import sndhdr
+
 import sqlite3 as sq
 
 

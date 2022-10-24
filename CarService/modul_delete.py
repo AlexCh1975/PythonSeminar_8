@@ -7,4 +7,4 @@ def dellete(path):
 
         cur.execute('DELETE FROM person WHERE surname == ?', ('Федоров',))
 
-dellete('db_carservice.sqlite')
+# dellete('db_carservice.sqlite')

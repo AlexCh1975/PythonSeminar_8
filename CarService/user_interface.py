@@ -1,6 +1,7 @@
 
 import re
 from datetime import datetime
+import modul_print as mp
 
 def menu_carservice():
     print('-------------------------------------------------')
@@ -50,6 +51,15 @@ def ui_change():
     # if n_person: return 1
 
 def ui_person(): 
+    data_person = ui_add_person()
+    data_car = ui_add_car()
+    data = {}
+    data['persons'] = data_person
+    data['cars'] = data_car
+    return data
+
+# Добавление данных клиента 
+def ui_add_person():
     print('-------------------------------------------------')
 
     # data_person = {}
@@ -95,121 +105,73 @@ def ui_person():
             print("Некорректный ввод!")
 
     print('-------------------------------------------------')
+    return data_person
 
-    print("Данные Автомобиля.")
-    # data_car = {}
-    data_car = []
+    # print("Данные Автомобиля.")
+    # # data_car = {}
+    # data_car = []
 
-    while True:
-        brand = input("Марка: ")
-        if brand.isalpha(): 
-            # data_car['brand'] = brand
-            data_car.append(brand)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     brand = input("Марка: ")
+    #     if brand.isalpha(): 
+    #         # data_car['brand'] = brand
+    #         data_car.append(brand)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    while True:
-        model = input("Модель: ")
-        if model.isalnum():
-            # data_car['model'] = model
-            data_car.append(model)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     model = input("Модель: ")
+    #     if model.isalnum():
+    #         # data_car['model'] = model
+    #         data_car.append(model)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    while True:
-        year_issue = input("Год выпуска: ")
-        if year_issue.isdigit():
-            year_issue = int(year_issue)
-            # data_car['year_issue'] = year_issue
-            data_car.append(year_issue)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     year_issue = input("Год выпуска: ")
+    #     if year_issue.isdigit():
+    #         year_issue = int(year_issue)
+    #         # data_car['year_issue'] = year_issue
+    #         data_car.append(year_issue)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    while True:
-        mileage = input("Пробег (км)(миль): ")
-        if mileage.isdigit(): 
-            mileage = int(mileage)
-            # data_car['mileage'] = mileage
-            data_car.append(mileage)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     mileage = input("Пробег (км)(миль): ")
+    #     if mileage.isdigit(): 
+    #         mileage = int(mileage)
+    #         # data_car['mileage'] = mileage
+    #         data_car.append(mileage)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    while True:
-        vin = input("VIN-номер (мин 10 мак 17): ")
-        if 9 < len(vin) < 18: 
-            # data_car['vin'] = vin
-            data_car.append(vin)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     vin = input("VIN-номер (мин 10 мак 17): ")
+    #     if 9 < len(vin) < 18: 
+    #         # data_car['vin'] = vin
+    #         data_car.append(vin)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    while True:
-        state_number = input("Гос номер: ")
-        if state_number.isalnum(): 
-            # data_car['state_number'] = state_number
-            state_number = state_number.lower()
-            data_car.append(state_number)
-            break
-        else:
-            print("Некорректный ввод!")
+    # while True:
+    #     state_number = input("Гос номер: ")
+    #     if state_number.isalnum(): 
+    #         # data_car['state_number'] = state_number
+    #         state_number = state_number.lower()
+    #         data_car.append(state_number)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
 
-    data = {}
-    data['persons'] = data_person
-    data['cars'] = data_car
-    return data
-
-#         
-def ui_searh_surname():
-    print('-------------------------------------------------') 
-    surname = input("Введите фамилию для поиска: ") 
-    while True:
-        # surname = input("Введите фамилию для поиска: ")
-        if surname.isalpha():
-            surname = surname.capitalize()
-            return surname
-        else: 
-            print("Некоректный ввод!")
-
-def ui_searh_state_number():
-    print('-------------------------------------------------')
-    state_number = input("Введите гос. номер авто: ")  
-    while True:
-        # state_number = input("Введите гос. номер авто: ")
-        if state_number.isalnum():
-            state_number = state_number.lower()
-            return state_number
-        else: 
-            print("Некоректный ввод!")
-
-
-def ui_change_repair():
-    print('-------------------------------------------------')
-    data = []
-    while True:
-        date = input("Введите дату ремонта: ")
-        if date.isdigit() or '.' in date:
-            data.append(date)
-            break
-        else:
-            print("Некоректный ввод!")
-
-    repair_op = input("Ремонт: ")
-    data.append(repair_op)
-
-    while True:
-        price = input("Стоимость ремонта: ")
-        if price.isdigit() or '.' in price:
-            price = float(price)
-            data.append(price)
-            break
-        else:
-            print("Некоректный ввод!")
-
-    return data
+    # data = {}
+    # data['persons'] = data_person
+    # data['cars'] = data_car
+    # return data
 
 # Добавить транспортное средство
 def ui_add_car():
@@ -274,6 +236,133 @@ def ui_add_car():
         else:
             print("Некорректный ввод!")
     return data_car
+
+#  Поиск по фамилии       
+def ui_searh_surname():
+    print('-------------------------------------------------') 
+    surname = input("Введите фамилию для поиска: ") 
+    while True:
+        # surname = input("Введите фамилию для поиска: ")
+        if surname.isalpha():
+            surname = surname.capitalize()
+            return surname
+        else: 
+            print("Некоректный ввод!")
+
+# Поиск по гос. номеру
+def ui_searh_state_number():
+    print('-------------------------------------------------')
+    state_number = input("Введите гос. номер авто: ")  
+    while True:
+        # state_number = input("Введите гос. номер авто: ")
+        if state_number.isalnum():
+            state_number = state_number.lower()
+            return state_number
+        else: 
+            print("Некоректный ввод!")
+
+# Добавление данных о ремонте
+def ui_change_repair():
+    print('-------------------------------------------------')
+    data = []
+    while True:
+        date = input("Введите дату ремонта: ")
+        if date.isdigit() or '.' in date:
+            data.append(date)
+            break
+        else:
+            print("Некоректный ввод!")
+
+    repair_op = input("Ремонт: ")
+    data.append(repair_op)
+
+    while True:
+        price = input("Стоимость ремонта: ")
+        if price.isdigit() or '.' in price:
+            price = float(price)
+            data.append(price)
+            break
+        else:
+            print("Некоректный ввод!")
+
+    return data
+
+def ui_select_person(data):
+    print('-------------------------------------------------')
+    mp.print_res(data)
+    while True:
+        id = input("Введите id нужного клиента: ")
+        if id.isdigit():
+            id = int(id)
+            return id
+        else:
+            print("Некоректный ввод!")    
+
+
+
+# # Добавить транспортное средство
+# def ui_add_car():
+#     print('-------------------------------------------------')
+#     print("Внесите данные автомобиля!")
+#     data_car = []
+
+#     while True:
+#         brand = input("Марка: ")
+#         if brand.isalpha(): 
+#             # data_car['brand'] = brand
+#             data_car.append(brand)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         model = input("Модель: ")
+#         if model.isalnum():
+#             # data_car['model'] = model
+#             data_car.append(model)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         year_issue = input("Год выпуска: ")
+#         if year_issue.isdigit():
+#             year_issue = int(year_issue)
+#             # data_car['year_issue'] = year_issue
+#             data_car.append(year_issue)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         mileage = input("Пробег (км)(миль): ")
+#         if mileage.isdigit(): 
+#             mileage = int(mileage)
+#             # data_car['mileage'] = mileage
+#             data_car.append(mileage)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         vin = input("VIN-номер (мин 10 мак 17): ")
+#         if 9 < len(vin) < 18: 
+#             # data_car['vin'] = vin
+#             data_car.append(vin)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         state_number = input("Гос номер: ")
+#         if state_number.isalnum(): 
+#             # data_car['state_number'] = state_number
+#             state_number = state_number.lower()
+#             data_car.append(state_number)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+#     return data_car
 
    
         

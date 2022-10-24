@@ -1,5 +1,14 @@
 import sqlite3 as sq
 
+def search_surname_p(path, surname):
+    with sq.connect(path) as con:
+        cur = con.cursor()
+
+        res = list(cur.execute("""
+                    SELECT * FROM persons WHERE surname == ?
+                    """, (surname,)))
+    return res
+
 def search_surname(path, surname):
 
     with sq.connect(path) as con:
@@ -53,4 +62,4 @@ def search_state_number(path, state_number):
 
     return res
 
-print(search_state_number('db_carservice.db', 'ке234н'))
+# print(search_state_number('db_carservice.db', 'ке234н'))
