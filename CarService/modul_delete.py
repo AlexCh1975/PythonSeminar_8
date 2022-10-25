@@ -1,4 +1,5 @@
 import sqlite3 as sq
+import logger as log
 
 def delete(path, id):
 
@@ -6,5 +7,4 @@ def delete(path, id):
         cur = con.cursor()
 
         cur.execute('DELETE FROM persons WHERE id == ?', (id,))
-
 # dellete('db_carservice.sqlite')

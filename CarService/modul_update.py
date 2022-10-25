@@ -1,4 +1,5 @@
 import sqlite3 as sq
+import logger as log
 
 def update(path, id, phone_n):
 
@@ -7,6 +8,10 @@ def update(path, id, phone_n):
 
         cur.execute('UPDATE persons SET phone = ? WHERE id == ?', (phone_n, id,))
         res = cur.execute('SELECT * FROM persons WHERE id == ?', (id,))
-    return res        
+        log.all_logger(res, 'изменение номера телефона')
+        print("Номер успешно изменен.")
+        
+
+            
 
 # print(update('db_carservice.db', 33, 111111))

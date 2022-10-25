@@ -1,29 +1,7 @@
 import sqlite3 as sq
-# from sqlite3 import Error
-
-# def create_connection(path):
-#     connection = None
-#     try:
-#         connection = sq.connect(path)
-#         print("Connection to SQLite DB successful")
-#     except Error as e:
-#         print(f"The error '{e}' occurred")
-
-#     return connection
-
-# def create_db(connection, query):
-#     cursor = connection.cursor()
-#     try:
-#         cursor.execute(query)
-#         connection.commit()
-#         print("Query executed successfully")
-#     except Error as e:
-#         print(f"The error '{e}' occurred")
 
 def create_db(path, item):
-    # with sq.connect(path) as con:
-    #     cur = con.cursor()
-    #     cur.execute(item)
+
     if item == 'persons':
         persons = """
         CREATE TABLE IF NOT EXISTS persons (
@@ -65,14 +43,9 @@ def create(path, item):
         cur = con.cursor()
         cur.execute(item)
 
+# path = 'db_carservice.db'
+path = 'db_service.db'
 
-# connection = create_connection('db_carservice.sqlite')
-# create_db(connection, person)
-# create_db(connection, car)
-
-# create_db('db_carservice.sqlite', person)
-# create_db('db_carservice.sqlite', repair)
-
-# c_db.create_db(path, 'persons')
-#     c_db.create_db(path, 'cars')
-#     c_db.create_db(path, 'repair')
+# create_db(path, 'persons')
+# create_db(path, 'cars')
+# create_db(path, 'repair')

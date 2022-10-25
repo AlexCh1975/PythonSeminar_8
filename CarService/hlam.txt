@@ -1,0 +1,205 @@
+  # try:
+    #     sqlite_connection = sq.connect('db_carservice.sqlite')
+    #     cursor = sqlite_connection.cursor()
+    #     print("Подключен к SQLite")
+
+    #     # key_per_str = ', '.join(data['person'])
+    #     # person_str = ', '.join(data['person'].values())
+
+    #     sqlite_insert_query = """INSERT INTO db_carservice
+    #                         VALUES
+    #                         (?, ?, ?, ?);"""
+        
+    #     count = cursor.execute(sqlite_insert_query, data)
+    #     sqlite_connection.commit()
+    #     print("Запись успешно вставлена ​​в таблицу db_carservice ", cursor.rowcount)
+    #     cursor.close()
+
+    # except sq.Error as error:
+    #     print("Ошибка при работе с SQLite", error)
+    # finally:
+    #     if sqlite_connection:
+    #         sqlite_connection.close()
+    #         print("Соединение с SQLite закрыто")
+
+
+    # person_tuple = 'Федоров', 'Вадим', '23.11.76', '1234567'
+    # person_key = 'surname', 'name', 'birth_date', 'phone'
+
+
+
+
+     # n_person = input("  Новый клиет: 1")
+    # search_surname = input("  Поиск по фамилии: 2")
+    # search_state_number = input("  Поиск по гос. номеру: 3")
+    # all_change = input("  Внести изменения: 4")
+    # change = input("    Изменение данных: 1")
+    # repair = input("    Ремонт: 2")
+    # delete = input("    Удалить: 3")
+    
+    # if n_person: return 1
+
+
+
+    # print("Данные Автомобиля.")
+    # # data_car = {}
+    # data_car = []
+
+    # while True:
+    #     brand = input("Марка: ")
+    #     if brand.isalpha(): 
+    #         # data_car['brand'] = brand
+    #         data_car.append(brand)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # while True:
+    #     model = input("Модель: ")
+    #     if model.isalnum():
+    #         # data_car['model'] = model
+    #         data_car.append(model)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # while True:
+    #     year_issue = input("Год выпуска: ")
+    #     if year_issue.isdigit():
+    #         year_issue = int(year_issue)
+    #         # data_car['year_issue'] = year_issue
+    #         data_car.append(year_issue)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # while True:
+    #     mileage = input("Пробег (км)(миль): ")
+    #     if mileage.isdigit(): 
+    #         mileage = int(mileage)
+    #         # data_car['mileage'] = mileage
+    #         data_car.append(mileage)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # while True:
+    #     vin = input("VIN-номер (мин 10 мак 17): ")
+    #     if 9 < len(vin) < 18: 
+    #         # data_car['vin'] = vin
+    #         data_car.append(vin)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # while True:
+    #     state_number = input("Гос номер: ")
+    #     if state_number.isalnum(): 
+    #         # data_car['state_number'] = state_number
+    #         state_number = state_number.lower()
+    #         data_car.append(state_number)
+    #         break
+    #     else:
+    #         print("Некорректный ввод!")
+
+    # data = {}
+    # data['persons'] = data_person
+    # data['cars'] = data_car
+    # return data
+
+# Добавить транспортное средство
+
+
+
+# # Добавить транспортное средство
+# def ui_add_car():
+#     print('-------------------------------------------------')
+#     print("Внесите данные автомобиля!")
+#     data_car = []
+
+#     while True:
+#         brand = input("Марка: ")
+#         if brand.isalpha(): 
+#             # data_car['brand'] = brand
+#             data_car.append(brand)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         model = input("Модель: ")
+#         if model.isalnum():
+#             # data_car['model'] = model
+#             data_car.append(model)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         year_issue = input("Год выпуска: ")
+#         if year_issue.isdigit():
+#             year_issue = int(year_issue)
+#             # data_car['year_issue'] = year_issue
+#             data_car.append(year_issue)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         mileage = input("Пробег (км)(миль): ")
+#         if mileage.isdigit(): 
+#             mileage = int(mileage)
+#             # data_car['mileage'] = mileage
+#             data_car.append(mileage)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         vin = input("VIN-номер (мин 10 мак 17): ")
+#         if 9 < len(vin) < 18: 
+#             # data_car['vin'] = vin
+#             data_car.append(vin)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+
+#     while True:
+#         state_number = input("Гос номер: ")
+#         if state_number.isalnum(): 
+#             # data_car['state_number'] = state_number
+#             state_number = state_number.lower()
+#             data_car.append(state_number)
+#             break
+#         else:
+#             print("Некорректный ввод!")
+#     return data_car
+
+   
+        
+
+# def ui_repair():        
+# def ui_change():  
+
+
+
+# from sqlite3 import Error
+
+# def create_connection(path):
+#     connection = None
+#     try:
+#         connection = sq.connect(path)
+#         print("Connection to SQLite DB successful")
+#     except Error as e:
+#         print(f"The error '{e}' occurred")
+
+#     return connection
+
+# def create_db(connection, query):
+#     cursor = connection.cursor()
+#     try:
+#         cursor.execute(query)
+#         connection.commit()
+#         print("Query executed successfully")
+#     except Error as e:
+#         print(f"The error '{e}' occurred")

@@ -1,36 +1,10 @@
 
 import sqlite3 as sq
+import logger as log
 
 
 
 def add_table_person(path, persons):
-    # try:
-    #     sqlite_connection = sq.connect('db_carservice.sqlite')
-    #     cursor = sqlite_connection.cursor()
-    #     print("Подключен к SQLite")
-
-    #     # key_per_str = ', '.join(data['person'])
-    #     # person_str = ', '.join(data['person'].values())
-
-    #     sqlite_insert_query = """INSERT INTO db_carservice
-    #                         VALUES
-    #                         (?, ?, ?, ?);"""
-        
-    #     count = cursor.execute(sqlite_insert_query, data)
-    #     sqlite_connection.commit()
-    #     print("Запись успешно вставлена ​​в таблицу db_carservice ", cursor.rowcount)
-    #     cursor.close()
-
-    # except sq.Error as error:
-    #     print("Ошибка при работе с SQLite", error)
-    # finally:
-    #     if sqlite_connection:
-    #         sqlite_connection.close()
-    #         print("Соединение с SQLite закрыто")
-
-
-    # person_tuple = 'Федоров', 'Вадим', '23.11.76', '1234567'
-    # person_key = 'surname', 'name', 'birth_date', 'phone'
 
     with sq.connect(path) as con:
         cur = con.cursor()
@@ -40,6 +14,8 @@ def add_table_person(path, persons):
                     ( ?, ?, ?, ?)
                     """)
         cur.execute(persons_query, persons)
+        log.all_logger(persons, 'добавлено')
+        print(f"{persons[0]} {persons[1]} успешно добавлена.")
 
 def add_table_car(path, cars):
     with sq.connect(path) as con:
@@ -51,6 +27,8 @@ def add_table_car(path, cars):
                     ( ?, ?, ?, ?, ?, ?, ?)
                     """)
         cur.execute(cars_query, cars)
+        log.all_logger(cars, 'добавлено')
+        print(f"{cars[0]} {cars[1]} успешно добавлена.")
 
 def add_table_repair(path, repair):
     with sq.connect(path) as con:
@@ -62,11 +40,6 @@ def add_table_repair(path, repair):
                     ( ?, ?, ?, ?)
                     """)
         cur.execute(repair_query, repair)
+        log.all_logger(repair, 'добавлено')
+        print("Запись о ремонте успешно добавлена.")
 
-# repair_tuple = ['20.10.2022', 'ТО', '2550', 'зо999ж']
-# person_tuple = ['Григорьев', 'Вадим', '23.11.76', '1234567']
-# car_tuple = ['Opel', 'Cadet', 1999, '234987', 'qwe123fkhdgsghlkhg', 'зо999ж', 12]
-# create_db('sm_app.sqlite')
-# add_table_person('db_carservice.sqlite', person_tuple)
-# add_table_car('db_carservice.sqlite', car_tuple)
-# add_table_repair('db_carservice.sqlite', repair_tuple)
