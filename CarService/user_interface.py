@@ -15,11 +15,13 @@ def menu_carservice():
     print("     Внести изменения в базу: 4")
 
     while True:
-        index = int(input("Тип операции: "))
-        if 0 < index < 5:
-            return index
-        else:
-            print(f"{index} Некоректный выбор!")
+        index = input("Тип операции: ")
+        if index.isdigit() and len(index) == 1:
+            index = int(index)
+            if 0 < index < 5:
+                return index
+        print(f"{index} Некоректный выбор!")
+    print('-------------------------------------------------')
 
 # Доп. меню
 def ui_change():
@@ -30,11 +32,12 @@ def ui_change():
     print("     Удалить клиента из базы: 4")
 
     while True:
-        index = int(input("Тип операции: "))
-        if 0 < int(index) < 5:
-            return index
-        else:
-            print(f"{index} Некоректный выбор!")
+        index = input("Тип операции: ")
+        if index.isdigit() and len(index) == 1:
+            index = int(index)
+            if 0 < index < 5:
+                return index
+        print(f"{index} Некоректный выбор!")
     
 def ui_person(): 
     data_person = ui_add_person()
@@ -71,7 +74,7 @@ def ui_add_person():
 
     while True:
         birth_date = input("Дата рождения (DD.MM.YYYY): ")
-        if birth_date.isdigit() or '.' in birth_date: 
+        if re.findall(r'[0-3][0-9]\.[01][0-9]\.[12][09][0-9][0-9]',  birth_date): 
             data_person.append(birth_date)
             break
         else:
@@ -112,7 +115,8 @@ def ui_add_car():
 
     while True:
         year_issue = input("Год выпуска: ")
-        if year_issue.isdigit():
+        # if year_issue.isdigit() and len(year_issue) == 4:
+        if re.findall(r'[12][09]\d{2}', year_issue):
             year_issue = int(year_issue)
             data_car.append(year_issue)
             break
@@ -121,7 +125,7 @@ def ui_add_car():
 
     while True:
         mileage = input("Пробег (км)(миль): ")
-        if mileage.isdigit(): 
+        if mileage.isdigit() and len(mileage) < 10000000: 
             mileage = int(mileage)
             data_car.append(mileage)
             break
@@ -130,7 +134,7 @@ def ui_add_car():
 
     while True:
         vin = input("VIN-номер (мин 10 мак 17): ")
-        if 9 < len(vin) < 18: 
+        if 9 < len(vin) < 18 and vin.isalnum(): 
             data_car.append(vin.capitalize())
             break
         else:
@@ -138,7 +142,8 @@ def ui_add_car():
 
     while True:
         state_number = input("Гос номер: ")
-        if state_number.isalnum(): 
+        # if state_number.isalnum() and len(state_number) == 6:
+        if re.findall(r'[а-яА-Я][а-яА-Я]\d{3}[а-яА-Я]', state_number): 
             state_number = state_number.lower()
             data_car.append(state_number)
             break
@@ -161,10 +166,11 @@ def ui_searh_surname():
 # Поиск по гос. номеру
 def ui_searh_state_number():
     print('-------------------------------------------------')
-    state_number = input("Введите гос. номер авто: ")  
+    # state_number = input("Введите гос. номер авто: ")  
     while True:
-        # state_number = input("Введите гос. номер авто: ")
-        if state_number.isalnum():
+        state_number = input("Введите гос. номер авто: ")
+        # if state_number.isalnum() and len(state_number) == 6:
+        if re.findall(r'[а-яА-Я][а-яА-Я]\d{3}[а-яА-Я]', state_number):
             state_number = state_number.lower()
             return state_number
         else: 
@@ -174,20 +180,12 @@ def ui_searh_state_number():
 def ui_change_repair():
     print('-------------------------------------------------')
     data = []
-    # while True:
-    #     date = input("Введите дату ремонта (DD.MM.YYYY): ")
-    #     if date.isdigit() or '.' in date:
-    #         data.append(date)
-    #         break
-    #     else:
-    #         print("Некоректный ввод!")
-
     repair_op = input("Ремонт: ")
     data.append(repair_op)
 
     while True:
         price = input("Стоимость ремонта: ")
-        if price.isdigit() or '.' in price:
+        if re.findall(r'\d{,6}\.\d{,2}', price) or re.findall(r'\d{,6}', price):
             price = float(price)
             data.append(price)
             break
@@ -204,9 +202,11 @@ def ui_select_person(data):
         id = input("Введите id нужного клиента: ")
         if id.isdigit():
             id = int(id)
-            return id
-        else:
-            print("Некоректный ввод!")
+            for i in data:
+                if id == i[0]:
+                    return id
+        # else:
+        print("Некоректный ввод!")
 
 # Новый телефон клиента
 def ui_new_phone():

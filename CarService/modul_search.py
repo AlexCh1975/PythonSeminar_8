@@ -9,16 +9,15 @@ def search_surname_p(path, surname):
                     """, (surname,)))
     return res
 
-def search_surname(path, surname):
+def search_surname(path, id):
 
     with sq.connect(path) as con:
         cur = con.cursor()
 
         res_p = list(cur.execute("""
-                    SELECT * FROM persons WHERE surname == ?
-                    """, (surname,)))
-        id = res_p[0][0]
-
+                    SELECT * FROM persons WHERE id == ?
+                    """, (id,)))
+       
         res_c = list(cur.execute("""
                     SELECT * FROM cars WHERE person_id == ?
                     """, (id,)))
@@ -44,8 +43,12 @@ def search_state_number(path, state_number):
         res_c = list(cur.execute("""
                     SELECT * FROM cars WHERE state_number == ?
                     """, (state_number,)))
-        person_id = res_c[0][-1]
-        car_id = res_c[0][0]
+        if res_c:
+            person_id = res_c[0][-1]
+            car_id = res_c[0][0]
+        else: 
+               
+            return res_c         
         
         res_p = list(cur.execute("""
                     SELECT * FROM persons WHERE id == ?
@@ -62,4 +65,3 @@ def search_state_number(path, state_number):
 
     return res
 
-# print(search_surname_p('db_carservice.db', 'Соколова'))

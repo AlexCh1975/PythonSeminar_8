@@ -14,4 +14,3 @@ def update(path, id, phone_n):
 
             
 
-# print(update('db_carservice.db', 33, 111111))

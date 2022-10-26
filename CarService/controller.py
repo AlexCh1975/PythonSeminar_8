@@ -16,9 +16,8 @@ import os
 def select():
     # path = 'db_carservice.db'
     path = 'db_service.db'
-    # if os.path.exists(path) and os.path.getsize(path) > 0:
+    
     index = ui.menu_carservice()
-
     # Запись нового клиента
     if index == 1:
         add_in_db(path)
@@ -27,9 +26,6 @@ def select():
     elif index == 2:
         surname = ui.ui_searh_surname()
         data = search_by_surname(path, surname)
-        mp.print_res(data[0])
-        mp.print_res(data[1])
-        mp.print_res(data[2])
 
     # Поиск по гос. номеру    
     elif index == 3:
@@ -48,11 +44,6 @@ def select():
         elif index == 4:
             change_delete(path) # Удоление данных
 
-    # else:
-    #     c_db.create_db(path, 'persons')
-    #     c_db.create_db(path, 'cars')
-    #     c_db.create_db(path, 'repair')
-            # print(data)
 
 # Управление добавлением клиента
 def add_in_db(path):
@@ -61,19 +52,38 @@ def add_in_db(path):
     data_p = ms.search_surname_p(path, data['persons'][0])
     if len(data_p) > 1:
         index = data_p[-1][0]
-        # print(index)
     else:
         index = data_p[0][0]
     data['cars'].append(index)
-    # print(index)
     write.add_table_car(path, data['cars'])
 
 # Управление поиском по фамилии
 def search_by_surname(path, surname):
-        data = ms.search_surname(path, surname)
+        data = ms.search_surname_p(path, surname) 
         if data:
-            log.all_logger(data, 'поиск по фамилии')
-            return data
+            keys = ['клиенте', 'об авто', 'о ремонтных работах']
+            if len(data) > 1:
+                id = ui.ui_select_person(data)
+                data_p = ms.search_surname(path, id)
+                log.all_logger(data, 'поиск по фамилии')
+
+                for i in range(len(data_p)):
+                    if data_p[i]:
+                        mp.print_res(data_p[i])
+                    else:
+                        log.all_logger(f"Нет данных {keys[i]}!")
+                        print(f"Нет данных {keys[i]}!")
+            else:
+                id = data[0][0]
+                data_p = ms.search_surname(path, id) 
+                log.all_logger(data, 'поиск по фамилии')
+                for i in range(len(data_p)):
+                    if data_p[i]:
+                            mp.print_res(data_p[i])
+                    else:
+                        log.all_logger(f"Нет данных {keys[i]}!")
+                        print(f"Нет данных {keys[i]}!")
+           
         else:
             log.all_logger("Клиента с такой фамилией в базе нет!", 'поиск по фамилии')
             print("Клиента с такой фамилией в базе нет!")
@@ -82,13 +92,16 @@ def search_by_surname(path, surname):
 def search_state_number(path, state_number):
         data = ms.search_state_number(path, state_number)
         if data:
-            log.all_logger(data[0:1], 'поиск по гос. номеру')
-            mp.print_res(data[0])
-            mp.print_res(data[1])
-            mp.print_res(data[2])
+            keys = ['клиенте', 'об авто', 'о ремонтных работах']
+            for i in range(len(data)):
+                if data[i]:
+                    mp.print_res(data[i])
+                else:
+                    log.all_logger(f"Нет данных {keys[i]}!")
+                    print(f"Нет данных {keys[i]}!")
         else:
             log.all_logger("Такого номера в базе нет!", 'поиск по гос. номеру')
-            print("Такого номера в базе нет!")
+            print(f"Такого номера {state_number} в базе нет!")
 
 # Управление. Добавить ремонт по гос. номеру
 def change_repair(path):
@@ -114,13 +127,12 @@ def add_car(path):
         data_car = ui.ui_add_car()
         data_car.append(id)
         write.add_table_car(path, data_car)
-        # print(data_car)
+        
 
 # Управление. Замена телефона клиента
 def change_phone(path):
     surname = ui.ui_searh_surname()
     data = ms.search_surname_p(path, surname)
-    # print(data)
     if len(data) > 1:
         id = ui.ui_select_person(data)
         n_phone = ui.ui_new_phone()
@@ -136,16 +148,13 @@ def change_delete(path):
     data = ms.search_surname_p(path, surname)  
     if len(data) > 1:
         id = ui.ui_select_person(data)
-        log.all_logger(id, 'удоление')
-        md.delete(path, id)
+        log.all_logger(id, f'{surname} удолено')
+        md.delete(path, id, surname)
     else:
         id = data[0][0]
-        log.all_logger(id, 'удоление')
-        md.delete(path, id)
+        log.all_logger(id, f'{surname} удолено')
+        md.delete(path, id, surname)
     
     
 
 
-select()
-# write.add_table_person('db_carservice.db', ['Григорьев', 'Вадим', '23.11.76', '1234567'])
-# write.add_table_car('db_carservice.db', ['VAZ', 'NIVA', 2018, 23497, 'qwe123fkhdfghjtyu', 'см888ж', 2])
